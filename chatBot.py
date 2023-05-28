@@ -42,7 +42,7 @@ os.environ['OPENAI_API_KEY']='sk-nUNBQE0R7ZgxorLAPxfUT3BlbkFJ9j7sW1m9GMGvdjpkptx
 
 try:
   file_path='text_chunks.txt'
-  if os.path.exist(file_path):
+  if os.path.exists(file_path):
                 print('yes')
   retrive_code='vishnu1$'
   with open(file_path,'r') as f:
