@@ -1,5 +1,5 @@
 import openai
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 import docx  #pip install python-docx
 
@@ -19,7 +19,8 @@ from telegram import InputFile
 from datetime import datetime
 import pytz
 
-
+load_dotenv()
+print('loaded env')
 quotes=['A baby fills a place in your heart that you never knew was empty.',
         "A mother's love is a guiding light in a child's life.",
         "In a mother's arms, a baby finds endless love.",
@@ -38,7 +39,7 @@ bot_key='6230020710:AAHGdnDczi4UNXgwepiJfw5zE25GDctiuB4'
 updater=Updater(bot_key,use_context=True)
 bot=updater.bot
 conversation_timeout=600
-os.environ['OPENAI_API_KEY']='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'
+#os.environ['OPENAI_API_KEY']='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'
 
 try:
   file_path='text_chunks.txt'
@@ -48,19 +49,22 @@ try:
   with open(file_path,'r') as f:
     text_chunks=f.read().split(retrive_code)
   tokens=400
-  print('Loading LLM model ...')
-  llm = ChatOpenAI(temperature=0.5,model_name='gpt-3.5-turbo',max_tokens=tokens)
-  chain = load_qa_chain(llm, chain_type="stuff")
+  
+  
   print('Loading Embedding model ...')
   embeddings_model_name1='all-MiniLM-L6-v2'
   embeddings_model_name2='distilbert-base-nli-stsb-mean-tokens'
   embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name1)
   print('Creating docsearch ...')
+  
   try:
     docsearch = FAISS.from_texts(text_chunks, embeddings)
   except Exception as e:
     print('error in docsearch...')
     print(e)
+  print('Loading LLM model ...')
+  llm = ChatOpenAI(temperature=0.5,model_name='gpt-3.5-turbo',max_tokens=tokens)
+  chain = load_qa_chain(llm, chain_type="stuff")
 except Exception as e:
   print('error in loading ....')
   print(e)
