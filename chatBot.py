@@ -52,7 +52,7 @@ try:
   print('Loading Embedding model ...')
   embeddings_model_name1='all-MiniLM-L6-v2'
   embeddings_model_name2='distilbert-base-nli-stsb-mean-tokens'
-  embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name2)
+  embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name1)
   print('Creating docsearch ...')
   try:
     docsearch = FAISS.from_texts(text_chunks, embeddings)
