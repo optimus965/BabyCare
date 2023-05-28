@@ -49,7 +49,7 @@ try:
   with open(file_path,'r') as f:
     text_chunks=f.read().split(retrive_code)
   tokens=400
-  
+  print(len(text_chunks))
   
   print('Loading Embedding model ...')
   embeddings_model_name1='all-MiniLM-L6-v2'
