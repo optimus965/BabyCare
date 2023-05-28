@@ -50,8 +50,9 @@ try:
   llm = ChatOpenAI(temperature=0.5,model_name='gpt-3.5-turbo',max_tokens=tokens)
   chain = load_qa_chain(llm, chain_type="stuff")
   print('Loading Embedding model ...')
-  embeddings_model_name='all-MiniLM-L6-v2'
-  embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name)
+  embeddings_model_name1='all-MiniLM-L6-v2'
+  embeddings_model_name2='distilbert-base-nli-stsb-mean-tokens'
+  embeddings = HuggingFaceEmbeddings(model_name=embeddings_model_name2)
   print('Creating docsearch ...')
   try:
     docsearch = FAISS.from_texts(text_chunks, embeddings)
